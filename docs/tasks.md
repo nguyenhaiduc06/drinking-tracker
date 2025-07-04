@@ -52,6 +52,14 @@
   - Estimated Effort: Medium
   - Target Folder: `app/routes/home.tsx`
 
+- [x] **Refactor home screen to new layout**
+  - Description: Implement new home screen layout with header navigation, character silhouette, and plus button modal.
+  - Priority: High
+  - Feature: Daily Water Logging
+  - Dependencies: Existing components
+  - Estimated Effort: Medium
+  - Target Folder: `app/index.tsx`, `components/CharacterSilhouette.tsx`, `components/WaterLogModal.tsx`
+
 ## 📊 History & Trends
 
 - [x] **Extend store to compute weekly/monthly aggregates**

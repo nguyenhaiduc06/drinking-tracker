@@ -1,7 +1,11 @@
 ---
+description: 
+globs: 
 alwaysApply: true
 ---
 
-Reference @BRIEF.md to understanding of this app
-When you work, pickup task one by one from @TASKS.md
-When finish, update task staus in @TASKS.md
+Reference [projectContext.md](mdc:docs/projectContext.md) to understand this app
+Reference [techContext.md](mdc:docs/techContext.md) to understand tech requirement
+When you work, pickup task one by one from [tasks.md](mdc:docs/tasks.md)
+When finish, update task staus in [tasks.md](mdc:docs/tasks.md)
+When there increamental changes, create new tasks in [tasks.md](mdc:docs/tasks.md), remember to read [projectContext.md](mdc:docs/projectContext.md) and [techContext.md](mdc:docs/techContext.md) to create tasks properly.
