@@ -1,25 +1,18 @@
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { ScrollView, Text, View } from 'react-native';
 import { HistoryChart } from '~/components/HistoryChart';
 import { useWaterLogStore } from '~/stores/waterLogStore';
+import ScreenHeader from '~/components/ScreenHeader';
 
 export default function History() {
+  const router = useRouter();
   const { entries, isLoading } = useWaterLogStore();
   const hasData = entries.length > 0;
 
   return (
-    <View className="bg-background pt-safe flex-1">
+    <View className="bg-background flex-1">
+      <ScreenHeader title="History" onBack={() => router.back()} />
       <ScrollView className="bg-background flex-1" showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View className="mb-8 mt-6 px-6">
-          <Text className="font-quicksand text-primary mb-2 text-center text-3xl font-bold">
-            📊 Your Hydration Journey
-          </Text>
-          <Text className="font-quicksand text-text-secondary text-center text-base">
-            Track your progress and stay motivated
-          </Text>
-        </View>
-
         {/* History Chart */}
         {hasData ? (
           <View className="px-4">

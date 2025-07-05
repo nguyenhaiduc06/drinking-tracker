@@ -14,19 +14,19 @@ export const WaterProgressView: React.FC<WaterProgressViewProps> = ({
   const progressPercentage = Math.round(progress * 100);
 
   return (
-    <View className="bg-background relative flex-1">
+    <View className="bg-pastelBlue/75 relative flex-1">
       {/* Progress Fill */}
       <View
-        className="bg-primary absolute bottom-0 left-0 right-0 rounded-t-2xl"
+        className="bg-pastelBlue absolute bottom-0 left-0 right-0 rounded-t-2xl border border-white/60"
         style={{ height: `${progressPercentage}%` }}
       />
 
       {/* Progress Text Overlay */}
       <View className="absolute inset-0 flex-1 items-center justify-center px-5">
-        <Text className="font-quicksand text-text-primary text-center text-5xl font-bold">
+        <Text className="font-quicksand text-center text-5xl font-bold text-white">
           {currentAmount.toLocaleString()}ml
         </Text>
-        <Text className="font-quicksand text-text-secondary mt-2 text-center text-lg font-medium">
+        <Text className="font-quicksand text-center text-xl font-medium text-white/60">
           of {dailyGoal.toLocaleString()}ml
         </Text>
       </View>

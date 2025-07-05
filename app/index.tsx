@@ -30,18 +30,18 @@ export default function Home() {
         {/* History Button - Top Left */}
         <Link href="/history" asChild>
           <TouchableOpacity
-            className="bg-primary h-12 w-12 items-center justify-center rounded-full"
+            className="h-12 w-12 items-center justify-center rounded-full bg-white/50"
             activeOpacity={0.85}>
-            <Ionicons name={icons.history} size={24} color={colors.surface} />
+            <Ionicons name="time" size={24} color={colors.text.primary} />
           </TouchableOpacity>
         </Link>
 
         {/* Settings Button - Top Right */}
         <Link href="/settings" asChild>
           <TouchableOpacity
-            className="bg-primary h-12 w-12 items-center justify-center rounded-full"
+            className="h-12 w-12 items-center justify-center rounded-full bg-white/50"
             activeOpacity={0.85}>
-            <Ionicons name={icons.settings} size={24} color={colors.surface} />
+            <Ionicons name="menu" size={24} color={colors.text.primary} />
           </TouchableOpacity>
         </Link>
       </View>
@@ -50,11 +50,11 @@ export default function Home() {
       <View className="absolute bottom-8 left-0 right-0 items-center">
         <TouchableOpacity
           onPress={() => router.push('/water-log')}
-          className="bg-primary h-16 w-16 items-center justify-center rounded-full"
+          className="bg-pastelBlue h-16 w-16 items-center justify-center rounded-full"
           activeOpacity={0.85}>
           <Ionicons name={icons.add} size={32} color={colors.surface} />
         </TouchableOpacity>
-        <Text className="font-quicksand text-primary mt-3 text-center text-sm font-medium">
+        <Text className="font-quicksand text-text-primary mt-3 text-center text-sm font-medium">
           Tap to log water intake
         </Text>
       </View>
