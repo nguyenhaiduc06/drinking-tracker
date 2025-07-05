@@ -2,13 +2,7 @@ import { Link, useRouter } from 'expo-router';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  runOnJS,
-} from 'react-native-reanimated';
-import ScreenHeader from '~/components/ScreenHeader';
+import { colors } from '~/config/colors';
 
 function SettingCard({ icon, iconColor, label, value, to, onPress, bg, destructive }: any) {
   const CardContent = () => (
@@ -62,34 +56,24 @@ function SettingCard({ icon, iconColor, label, value, to, onPress, bg, destructi
 export default function Settings() {
   const router = useRouter();
 
-  // Animation values
-  const opacity = useSharedValue(0);
-
-  // Start fade-in animation when component mounts
-  React.useEffect(() => {
-    // Start fading in after a small delay (when overlay is ~30% expanded)
-    // This creates the effect of content "emerging" from behind the expanding overlay
-    const timer = setTimeout(() => {
-      opacity.value = withTiming(1, { duration: 200 });
-    }, 150);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Animated styles
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-  }));
-
   const handleClearData = () => {
     // TODO: Implement clear data functionality
     console.log('Clear data pressed');
   };
 
   return (
-    <Animated.View style={[{ flex: 1 }]} className="bg-background">
-      <ScreenHeader title="Settings" onBack={() => router.back()} />
-      <ScrollView className="bg-background" showsVerticalScrollIndicator={false}>
+    <View className="bg-background pt-safe flex-1">
+      <View className="h-16 flex-row items-center justify-between px-4">
+        <Text className="font-quicksand text-text-primary text-2xl font-bold">Settings</Text>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          className="h-12 w-12 items-center justify-center rounded-full bg-gray-50"
+          accessibilityLabel="Close settings">
+          <Ionicons name="close" size={24} color={colors.text.primary} />
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* First section */}
         <View className="mb-8">
           <View className="px-4">
@@ -151,6 +135,6 @@ export default function Settings() {
           </View>
         </View>
       </ScrollView>
-    </Animated.View>
+    </View>
   );
 }

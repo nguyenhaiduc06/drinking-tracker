@@ -95,12 +95,12 @@ export default function Home() {
   };
 
   return (
-    <View className="bg-background flex-1">
+    <View className="bg-background pt-safe flex-1">
       {/* Water Progress View - Full Screen */}
       <WaterProgressView currentAmount={todayTotal} dailyGoal={dailyGoal} />
 
       {/* Top Navigation Buttons */}
-      <View className="absolute left-0 right-0 top-12 flex-row justify-between px-6">
+      <View className="h-16 flex-row items-center justify-between px-4">
         {/* History Button - Top Left */}
         <Link href="/history" asChild>
           <TouchableOpacity

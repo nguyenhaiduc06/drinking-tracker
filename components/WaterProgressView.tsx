@@ -14,10 +14,10 @@ export const WaterProgressView: React.FC<WaterProgressViewProps> = ({
   const progressPercentage = Math.round(progress * 100);
 
   return (
-    <View className="bg-pastelBlue/75 relative flex-1">
+    <View className="bg-pastelBlue/75 absolute bottom-0 left-0 right-0 top-0">
       {/* Progress Fill */}
       <View
-        className="bg-pastelBlue absolute bottom-0 left-0 right-0 rounded-t-2xl border border-white/60"
+        className="bg-pastelBlue absolute bottom-0 left-0 right-0 rounded-t-2xl"
         style={{ height: `${progressPercentage}%` }}
       />
 
