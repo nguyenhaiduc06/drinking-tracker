@@ -60,6 +60,22 @@
   - Estimated Effort: Medium
   - Target Folder: `app/index.tsx`, `components/CharacterSilhouette.tsx`, `components/WaterLogModal.tsx`
 
+- [x] **Add full-screen water progress view**
+  - Description: Create a full-screen water progress view that fills from bottom to top based on progress, using brand color #0079F1.
+  - Priority: High
+  - Feature: Daily Progress Visualization
+  - Dependencies: WaterLogStore, HydrationGoalStore
+  - Estimated Effort: Medium
+  - Target Folder: `components/WaterProgressView.tsx`, `app/index.tsx`
+
+- [x] **Create color configuration**
+  - Description: Create a centralized color configuration file with brand colors and UI color palette for consistent usage throughout the app.
+  - Priority: Medium
+  - Feature: UI/UX Consistency
+  - Dependencies: None
+  - Estimated Effort: Small
+  - Target Folder: `config/colors.ts`
+
 ## 📊 History & Trends
 
 - [x] **Extend store to compute weekly/monthly aggregates**
