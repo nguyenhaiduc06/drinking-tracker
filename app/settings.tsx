@@ -1,6 +1,13 @@
 import { Link, useRouter } from 'expo-router';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as React from 'react';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  runOnJS,
+} from 'react-native-reanimated';
 import ScreenHeader from '~/components/ScreenHeader';
 
 function SettingCard({ icon, iconColor, label, value, to, onPress, bg, destructive }: any) {
@@ -55,13 +62,32 @@ function SettingCard({ icon, iconColor, label, value, to, onPress, bg, destructi
 export default function Settings() {
   const router = useRouter();
 
+  // Animation values
+  const opacity = useSharedValue(0);
+
+  // Start fade-in animation when component mounts
+  React.useEffect(() => {
+    // Start fading in after a small delay (when overlay is ~30% expanded)
+    // This creates the effect of content "emerging" from behind the expanding overlay
+    const timer = setTimeout(() => {
+      opacity.value = withTiming(1, { duration: 200 });
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Animated styles
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
+
   const handleClearData = () => {
     // TODO: Implement clear data functionality
     console.log('Clear data pressed');
   };
 
   return (
-    <View className="bg-background flex-1">
+    <Animated.View style={[{ flex: 1 }, animatedStyle]} className="bg-background">
       <ScreenHeader title="Settings" onBack={() => router.back()} />
       <ScrollView className="bg-background" showsVerticalScrollIndicator={false}>
         {/* First section */}
@@ -125,6 +151,6 @@ export default function Settings() {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </Animated.View>
   );
 }

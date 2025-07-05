@@ -72,5 +72,38 @@ export default function Layout() {
     );
   }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="settings"
+        options={{
+          headerShown: false,
+          animation: 'none', // No animation since we handle it with custom overlay
+          animationDuration: 0,
+        }}
+      />
+      <Stack.Screen
+        name="history"
+        options={{
+          headerShown: false,
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name="water-log"
+        options={{
+          headerShown: false,
+          animation: 'slide_from_bottom',
+        }}
+      />
+      <Stack.Screen
+        name="reminders"
+        options={{
+          headerShown: false,
+          animation: 'slide_from_right',
+        }}
+      />
+    </Stack>
+  );
 }
