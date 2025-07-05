@@ -1,109 +1,74 @@
 import { Link, Stack } from 'expo-router';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { Container } from '~/components/Container';
-import { colors } from '~/config/colors';
-import { getIcon } from '~/config/icons';
-import { fontStyles } from '~/config/fonts';
+import { Ionicons } from '@expo/vector-icons';
 
 const settingsSections = [
   {
     data: [
       {
-        key: 'appIcon',
-        label: 'App icon',
+        key: 'goal',
+        label: 'Goal',
         iconType: 'icon',
-        icon: 'home', // Example icon, replace as needed
-        to: '/app-icon',
-      },
-    ],
-    headerChip: "WHAT'S NEW",
-  },
-  {
-    data: [
-      {
-        key: 'resetTime',
-        label: 'Day Reset Time, Week',
-        iconType: 'icon',
-        icon: 'time',
-        iconColor: colors.primary,
-        to: '/reset-time',
-        value: '12:00 AM',
-        valueType: 'chip',
-        valueColor: colors.text.secondary,
-        bg: colors.primaryLight + '10',
+        icon: 'trophy-outline',
+        iconColor: '#60A5FA', // pastelBlue
+        to: '/goal',
+        bg: '#EBF8FF',
       },
       {
-        key: 'units',
-        label: 'Measurement Units',
+        key: 'reminder',
+        label: 'Reminder',
         iconType: 'icon',
-        icon: 'edit',
-        iconColor: colors.secondary,
-        to: '/units',
-        value: 'ml',
-        valueType: 'chip',
-        valueColor: colors.text.secondary,
-        bg: colors.secondaryLight + '10',
-      },
-      {
-        key: 'sounds',
-        label: 'App Sounds, Animations',
-        iconType: 'icon',
-        icon: 'notifications',
-        iconColor: colors.accent,
-        to: '/sounds',
-        bg: colors.accentLight + '10',
-      },
-      {
-        key: 'health',
-        label: 'Apple Health Sync',
-        iconType: 'icon',
-        icon: 'success',
-        iconColor: colors.success,
-        to: '/health',
-        value: 'Connect',
-        valueType: 'chip',
-        valueColor: colors.text.secondary,
-        bg: colors.secondary + '10',
-      },
-      {
-        key: 'watch',
-        label: 'Apple Watch',
-        iconType: 'icon',
-        icon: 'time',
-        iconColor: colors.secondary,
-        to: '/watch',
-        bg: colors.secondary + '10',
-      },
-      {
-        key: 'icloud',
-        label: 'iCloud Backup',
-        iconType: 'icon',
-        icon: 'cloud', // Use a relevant Ionicon if available
-        iconColor: colors.accent,
-        to: '/icloud',
-        bg: colors.accent + '10',
+        icon: 'notifications-outline',
+        iconColor: '#A78BFA', // pastelPurple
+        to: '/reminders',
+        bg: '#F3E8FF',
       },
     ],
   },
   {
     data: [
       {
-        key: 'language',
-        label: 'Language',
+        key: 'privacy',
+        label: 'Privacy Policy',
         iconType: 'icon',
-        icon: 'info',
-        iconColor: colors.primary,
-        to: '/language',
-        bg: colors.primary + '10',
+        icon: 'lock-closed-outline',
+        iconColor: '#34D399', // pastelGreen
+        to: '/privacy',
+        bg: '#ECFDF5',
       },
       {
-        key: 'help',
-        label: 'Help & Support',
+        key: 'terms',
+        label: 'Terms of Service',
         iconType: 'icon',
-        icon: 'info',
-        iconColor: colors.tertiaryDark,
-        to: '/help',
-        bg: colors.tertiary + '10',
+        icon: 'document-text-outline',
+        iconColor: '#C084FC', // pastelLavender
+        to: '/terms',
+        bg: '#FAF5FF',
+      },
+      {
+        key: 'clear',
+        label: 'Clear Data',
+        iconType: 'icon',
+        icon: 'trash-outline',
+        iconColor: '#FB7185', // pastelPink
+        to: '/clear-data',
+        bg: '#FFF1F2',
+        destructive: true,
+      },
+    ],
+  },
+  {
+    data: [
+      {
+        key: 'version',
+        label: 'App Version',
+        iconType: 'icon',
+        icon: 'information-circle-outline',
+        iconColor: '#FB923C', // pastelOrange
+        to: '/version',
+        value: '1.0.0',
+        valueType: 'text',
+        bg: '#FFF7ED',
       },
     ],
   },
@@ -119,63 +84,31 @@ function SettingCard({
   valueColor,
   to,
   bg,
+  destructive,
 }: any) {
   return (
     <Link href={to} asChild>
-      <TouchableOpacity
-        style={{
-          backgroundColor: colors.gray[100],
-          borderRadius: 20,
-          marginBottom: 16,
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingHorizontal: 16,
-          paddingVertical: 14,
-        }}
-        activeOpacity={0.85}>
+      <TouchableOpacity className="mb-4 flex-row items-center rounded-lg bg-gray-50 px-4 py-3.5">
         {/* Icon */}
         <View
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: 22,
-            backgroundColor: bg || colors.tertiaryLight,
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginRight: 16,
-          }}>
-          {iconType === 'icon' && getIcon(icon, 26, iconColor || colors.primary)}
+          className="mr-4 h-11 w-11 items-center justify-center rounded-full"
+          style={{ backgroundColor: bg }}>
+          {iconType === 'icon' && <Ionicons name={icon} size={20} color={iconColor} />}
         </View>
         {/* Label & Value */}
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={[fontStyles.bold, { fontSize: 16, color: colors.text.primary }]}>
+        <View className="flex-1 flex-row items-center">
+          <Text
+            className={`font-quicksand text-base font-bold ${destructive ? 'text-pastelPink' : 'text-text-primary'}`}>
             {label}
           </Text>
           {value && (
-            <View style={{ flex: 1, alignItems: 'flex-end' }}>
+            <View className="flex-1 items-end">
               {valueType === 'chip' ? (
-                <Text
-                  style={[
-                    fontStyles.medium,
-                    {
-                      fontSize: 13,
-                      color: valueColor || colors.text.secondary,
-                      backgroundColor: colors.gray[200],
-                      borderRadius: 12,
-                      paddingHorizontal: 10,
-                      paddingVertical: 2,
-                      marginLeft: 8,
-                      overflow: 'hidden',
-                    },
-                  ]}>
+                <Text className="font-quicksand text-text-secondary ml-2 overflow-hidden rounded-xl bg-gray-200 px-2.5 py-0.5 text-xs font-medium">
                   {value}
                 </Text>
               ) : (
-                <Text
-                  style={[
-                    fontStyles.medium,
-                    { fontSize: 13, color: valueColor || colors.text.secondary, marginLeft: 8 },
-                  ]}>
+                <Text className="font-quicksand text-text-secondary ml-2 text-xs font-medium">
                   {value}
                 </Text>
               )}
@@ -183,7 +116,9 @@ function SettingCard({
           )}
         </View>
         {/* Chevron */}
-        <View style={{ marginLeft: 10 }}>{getIcon('chevronRight', 22, colors.gray[300])}</View>
+        <View className="ml-2.5">
+          <Ionicons name="chevron-forward" size={22} color="#D1D5DB" />
+        </View>
       </TouchableOpacity>
     </Link>
   );
@@ -191,60 +126,12 @@ function SettingCard({
 
 export default function Settings() {
   return (
-    <View className="bg-background flex-1">
-      <ScrollView
-        style={{ backgroundColor: colors.background }}
-        showsVerticalScrollIndicator={false}>
-        {/* Top bar with chip */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginTop: 16,
-            marginBottom: 8,
-            justifyContent: 'flex-end',
-            paddingHorizontal: 16,
-          }}>
-          <View
-            style={{
-              backgroundColor: colors.gray[100],
-              borderRadius: 16,
-              paddingHorizontal: 14,
-              paddingVertical: 4,
-            }}>
-            <Text
-              style={[
-                fontStyles.medium,
-                { fontSize: 13, color: colors.text.secondary, letterSpacing: 1 },
-              ]}>
-              WHAT'S NEW
-            </Text>
-          </View>
-        </View>
+    <View className="bg-background pt-safe flex-1">
+      <ScrollView className="bg-background" showsVerticalScrollIndicator={false}>
         {/* Settings sections */}
         {settingsSections.map((section, idx) => (
-          <View key={idx} style={{ marginBottom: idx < settingsSections.length - 1 ? 32 : 0 }}>
-            {/* Section chip if present */}
-            {section.headerChip && (
-              <View style={{ alignItems: 'flex-end', marginBottom: 8, paddingHorizontal: 16 }}>
-                <View
-                  style={{
-                    backgroundColor: colors.gray[100],
-                    borderRadius: 16,
-                    paddingHorizontal: 14,
-                    paddingVertical: 4,
-                  }}>
-                  <Text
-                    style={[
-                      fontStyles.medium,
-                      { fontSize: 13, color: colors.text.secondary, letterSpacing: 1 },
-                    ]}>
-                    {section.headerChip}
-                  </Text>
-                </View>
-              </View>
-            )}
-            <View style={{ paddingHorizontal: 16 }}>
+          <View key={idx} className={`${idx < settingsSections.length - 1 ? 'mb-8' : ''}`}>
+            <View className="px-4">
               {section.data.map((item: any) => (
                 <SettingCard key={item.key} {...item} />
               ))}
