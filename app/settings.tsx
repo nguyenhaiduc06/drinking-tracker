@@ -87,7 +87,7 @@ export default function Settings() {
   };
 
   return (
-    <Animated.View style={[{ flex: 1 }, animatedStyle]} className="bg-background">
+    <Animated.View style={[{ flex: 1 }]} className="bg-background">
       <ScreenHeader title="Settings" onBack={() => router.back()} />
       <ScrollView className="bg-background" showsVerticalScrollIndicator={false}>
         {/* First section */}

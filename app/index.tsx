@@ -83,11 +83,13 @@ export default function Home() {
     // Animate button scale slightly
     settingsScale.value = withTiming(1.15, { duration: 100 });
 
+    router.push('/settings');
+
     // Animate overlay to cover full screen
     overlayScale.value = withTiming(1, { duration: 450 }, (finished) => {
       if (finished) {
         // Navigate to settings after animation
-        runOnJS(router.push)('/settings');
+        // runOnJS(router.push)('/settings');
       }
     });
   };

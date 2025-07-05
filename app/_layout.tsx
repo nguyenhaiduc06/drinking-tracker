@@ -79,8 +79,8 @@ export default function Layout() {
         name="settings"
         options={{
           headerShown: false,
-          animation: 'none', // No animation since we handle it with custom overlay
-          animationDuration: 0,
+          animation: 'fade',
+          animationDuration: 300,
         }}
       />
       <Stack.Screen
