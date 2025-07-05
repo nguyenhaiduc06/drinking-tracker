@@ -31,13 +31,13 @@ export const HistoryChart: React.FC<HistoryChartProps> = ({ initialView = 'weekl
     return Math.min((amount / dailyGoal) * 100, 100);
   };
 
-  // Helper function to get bar color based on completion
+  // Helper function to get pastel bar color based on completion
   const getBarColor = (percentage: number) => {
-    if (percentage >= 100) return 'bg-green-500';
-    if (percentage >= 75) return 'bg-blue-500';
-    if (percentage >= 50) return 'bg-yellow-500';
-    if (percentage >= 25) return 'bg-orange-500';
-    return 'bg-red-400';
+    if (percentage >= 100) return 'bg-pastelLime';
+    if (percentage >= 75) return 'bg-pastelBlue';
+    if (percentage >= 50) return 'bg-pastelPurple';
+    if (percentage >= 25) return 'bg-pastelOrange';
+    return 'bg-pastelPink';
   };
 
   // Calculate statistics
@@ -50,28 +50,20 @@ export const HistoryChart: React.FC<HistoryChartProps> = ({ initialView = 'weekl
   return (
     <View className="w-full">
       {/* View Toggle */}
-      <View className="mb-4 flex-row rounded-lg bg-gray-100 p-1">
+      <View className="mb-4 flex-row rounded-xl bg-gray-100 p-1">
         <TouchableOpacity
           onPress={() => setCurrentView('weekly')}
-          className={`flex-1 rounded-md py-2 ${
-            currentView === 'weekly' ? 'bg-blue-500' : 'bg-transparent'
-          }`}>
+          className={`flex-1 rounded-lg py-2 ${currentView === 'weekly' ? 'bg-pastelBlue' : 'bg-transparent'}`}>
           <Text
-            className={`text-center font-medium ${
-              currentView === 'weekly' ? 'text-white' : 'text-gray-600'
-            }`}>
+            className={`font-quicksand text-center font-semibold ${currentView === 'weekly' ? 'text-white' : 'text-text-secondary'}`}>
             Weekly
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setCurrentView('monthly')}
-          className={`flex-1 rounded-md py-2 ${
-            currentView === 'monthly' ? 'bg-blue-500' : 'bg-transparent'
-          }`}>
+          className={`flex-1 rounded-lg py-2 ${currentView === 'monthly' ? 'bg-pastelBlue' : 'bg-transparent'}`}>
           <Text
-            className={`text-center font-medium ${
-              currentView === 'monthly' ? 'text-white' : 'text-gray-600'
-            }`}>
+            className={`font-quicksand text-center font-semibold ${currentView === 'monthly' ? 'text-white' : 'text-text-secondary'}`}>
             Monthly
           </Text>
         </TouchableOpacity>
@@ -79,53 +71,52 @@ export const HistoryChart: React.FC<HistoryChartProps> = ({ initialView = 'weekl
 
       {/* Statistics */}
       <View className="mb-6">
-        <Text className="mb-3 text-lg font-bold text-gray-800">
+        <Text className="font-quicksand text-primary mb-3 text-lg font-bold">
           {currentView === 'weekly' ? 'Weekly' : 'Monthly'} Summary
         </Text>
         <View className="flex-row flex-wrap gap-2">
-          <View className="min-w-[120px] flex-1 rounded-lg bg-blue-50 p-3">
-            <Text className="text-lg font-bold text-blue-600">
+          <View className="bg-pastelBlue/20 min-w-[120px] flex-1 rounded-xl p-3">
+            <Text className="font-quicksand text-pastelBlue text-lg font-bold">
               {completedDays}/{totalDays}
             </Text>
-            <Text className="text-sm text-blue-600">Goals Met</Text>
+            <Text className="font-quicksand text-pastelBlue text-sm">Goals Met</Text>
           </View>
-          <View className="min-w-[120px] flex-1 rounded-lg bg-green-50 p-3">
-            <Text className="text-lg font-bold text-green-600">{Math.round(averageIntake)}ml</Text>
-            <Text className="text-sm text-green-600">Daily Average</Text>
+          <View className="bg-pastelLime/20 min-w-[120px] flex-1 rounded-xl p-3">
+            <Text className="font-quicksand text-pastelLime text-lg font-bold">
+              {Math.round(averageIntake)}ml
+            </Text>
+            <Text className="font-quicksand text-pastelLime text-sm">Daily Average</Text>
           </View>
-          <View className="min-w-[120px] flex-1 rounded-lg bg-purple-50 p-3">
-            <Text className="text-lg font-bold text-purple-600">{Math.round(maxIntake)}ml</Text>
-            <Text className="text-sm text-purple-600">Best Day</Text>
+          <View className="bg-pastelPurple/20 min-w-[120px] flex-1 rounded-xl p-3">
+            <Text className="font-quicksand text-pastelPurple text-lg font-bold">
+              {Math.round(maxIntake)}ml
+            </Text>
+            <Text className="font-quicksand text-pastelPurple text-sm">Best Day</Text>
           </View>
         </View>
       </View>
 
       {/* Chart */}
       <View className="mb-4">
-        <Text className="mb-3 text-lg font-bold text-gray-800">Daily Progress</Text>
+        <Text className="font-quicksand text-primary mb-3 text-lg font-bold">Daily Progress</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View
-            className="flex-row items-end px-2"
-            style={{ minWidth: currentView === 'weekly' ? 350 : 800 }}>
+          <View className="min-w-[350px] flex-row items-end px-2 md:min-w-[800px]">
             {currentLogs.map((log, index) => {
               const percentage = getCompletionPercentage(log.totalAmount);
               const barHeight = Math.max(percentage * 2, 8); // Minimum height of 8
-
               return (
                 <View key={log.date} className="mx-1 flex-1 items-center">
                   {/* Bar */}
                   <View
-                    className={`w-6 ${getBarColor(percentage)} rounded-t-sm`}
+                    className={`w-6 ${getBarColor(percentage)} rounded-t-lg`}
                     style={{ height: barHeight }}
                   />
-
                   {/* Amount */}
-                  <Text className="mt-1 text-center text-xs text-gray-600">
+                  <Text className="font-quicksand text-text-secondary mt-1 text-center text-xs">
                     {log.totalAmount > 0 ? `${Math.round(log.totalAmount / 100) / 10}L` : '0'}
                   </Text>
-
                   {/* Date */}
-                  <Text className="mt-1 text-center text-xs text-gray-500">
+                  <Text className="font-quicksand text-text-tertiary mt-1 text-center text-xs">
                     {formatDate(log.date)}
                   </Text>
                 </View>
@@ -139,13 +130,13 @@ export const HistoryChart: React.FC<HistoryChartProps> = ({ initialView = 'weekl
       <View className="mb-4 flex-row items-center justify-center">
         <View className="flex-row items-center">
           <View className="mr-2 h-3 w-4 rounded-sm bg-gray-300" />
-          <Text className="text-xs text-gray-600">Goal: {dailyGoal}ml</Text>
+          <Text className="font-quicksand text-text-secondary text-xs">Goal: {dailyGoal}ml</Text>
         </View>
       </View>
 
       {/* Detailed List */}
       <View>
-        <Text className="mb-3 text-lg font-bold text-gray-800">Detailed View</Text>
+        <Text className="font-quicksand text-primary mb-3 text-lg font-bold">Detailed View</Text>
         <View className="space-y-2">
           {currentLogs
             .filter((log) => log.totalAmount > 0)
@@ -153,19 +144,21 @@ export const HistoryChart: React.FC<HistoryChartProps> = ({ initialView = 'weekl
             .map((log) => (
               <View
                 key={log.date}
-                className="flex-row items-center justify-between rounded-lg bg-gray-50 px-4 py-3">
+                className="flex-row items-center justify-between rounded-xl bg-gray-50 px-4 py-3">
                 <View className="flex-1">
-                  <Text className="font-medium text-gray-800">{formatDate(log.date)}</Text>
-                  <Text className="text-sm text-gray-600">{log.entries.length} entries</Text>
+                  <Text className="font-quicksand text-text-primary font-semibold">
+                    {formatDate(log.date)}
+                  </Text>
+                  <Text className="font-quicksand text-text-secondary text-sm">
+                    {log.entries.length} entries
+                  </Text>
                 </View>
                 <View className="items-end">
-                  <Text className="font-bold text-gray-800">
+                  <Text className="font-quicksand text-pastelBlue font-bold">
                     {log.totalAmount.toLocaleString()}ml
                   </Text>
                   <Text
-                    className={`text-sm ${
-                      log.totalAmount >= dailyGoal ? 'text-green-600' : 'text-orange-600'
-                    }`}>
+                    className={`font-quicksand text-sm ${log.totalAmount >= dailyGoal ? 'text-pastelLime' : 'text-pastelOrange'}`}>
                     {Math.round(getCompletionPercentage(log.totalAmount))}% of goal
                   </Text>
                 </View>
