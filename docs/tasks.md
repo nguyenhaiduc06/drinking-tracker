@@ -170,6 +170,22 @@
   - Estimated Effort: Medium
   - Target Folder: `app/routes/settings.tsx`
 
+- [x] **Update home screen with navigation buttons**
+  - Description: Add icon buttons to top left (history) and top right (settings) for easy navigation.
+  - Priority: High
+  - Feature: Navigation & UX
+  - Dependencies: Existing home screen
+  - Estimated Effort: Small
+  - Target Folder: `app/index.tsx`
+
+- [x] **Restructure settings screen with organized list**
+  - Description: Display a clean list of setting items, each opening a dedicated screen for that setting.
+  - Priority: High
+  - Feature: Settings & Navigation
+  - Dependencies: Settings screen
+  - Estimated Effort: Medium
+  - Target Folder: `app/settings.tsx`
+
 ## 🏅 Streaks & Badges (Nice-to-Have)
 
 - [ ] **Add `streak` and `badge` logic to store**
@@ -195,6 +211,80 @@
   - Dependencies: BadgeDisplay component
   - Estimated Effort: Small
   - Target Folder: `app/routes/home.tsx`
+
+## 🎨 UI/UX Design System
+
+- [x] **Create UI/UX context document**
+  - Description: Define cute, young, and energetic design language with color palette, typography, and component guidelines.
+  - Priority: High
+  - Feature: Design System
+  - Dependencies: None
+  - Estimated Effort: Medium
+  - Target Folder: `docs/uiuxContext.md`
+
+- [x] **Update color palette to cute & energetic theme**
+  - Description: Replace current blue theme with pink/mint/yellow palette for cute and energetic feel.
+  - Priority: High
+  - Feature: Visual Design
+  - Dependencies: UI/UX context
+  - Estimated Effort: Small
+  - Target Folder: `config/colors.ts`
+
+- [x] **Update settings screen with new UI/UX design**
+  - Description: Apply cute design principles to settings screen with rounded corners, soft shadows, gradient backgrounds, and friendly messaging.
+  - Priority: High
+  - Feature: Visual Design
+  - Dependencies: Color palette
+  - Estimated Effort: Medium
+  - Target Folder: `app/settings.tsx`
+
+- [x] **Implement new typography scale**
+  - Description: Update typography system with proper font weights and sizes for cute & energetic feel.
+  - Priority: High
+  - Feature: Visual Design
+  - Dependencies: UI/UX context
+  - Estimated Effort: Small
+  - Target Folder: `config/fonts.ts`
+
+- [ ] **Update component styling with rounded corners and soft shadows**
+  - Description: Apply cute design principles to all components with rounded corners, soft shadows, and friendly styling.
+  - Priority: High
+  - Feature: Visual Design
+  - Dependencies: Color palette, typography
+  - Estimated Effort: Medium
+  - Target Folder: `components/`
+
+- [ ] **Add gradient backgrounds to key elements**
+  - Description: Implement gradient backgrounds for buttons, cards, and hero elements using the new color palette.
+  - Priority: Medium
+  - Feature: Visual Design
+  - Dependencies: Color palette
+  - Estimated Effort: Small
+  - Target Folder: `components/`
+
+- [ ] **Implement bouncy button animations**
+  - Description: Add delightful micro-interactions with bouncy easing curves for button presses and interactions.
+  - Priority: Medium
+  - Feature: Micro-interactions
+  - Dependencies: Component styling
+  - Estimated Effort: Small
+  - Target Folder: `components/`
+
+- [x] **Update content messaging to friendly tone**
+  - Description: Replace all text content with encouraging, friendly language and strategic emoji usage.
+  - Priority: Medium
+  - Feature: Content & Messaging
+  - Dependencies: UI/UX context
+  - Estimated Effort: Medium
+  - Target Folder: All screens
+
+- [ ] **Add success celebrations and confetti effects**
+  - Description: Implement delightful success animations and confetti effects for achievements and goal completions.
+  - Priority: Low
+  - Feature: Micro-interactions
+  - Dependencies: Animation system
+  - Estimated Effort: Medium
+  - Target Folder: `components/`
 
 ## 🧪 Testing & Finalization
 

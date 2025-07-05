@@ -39,6 +39,39 @@ export default function Home() {
       {/* Water Progress View - Full Screen */}
       <WaterProgressView currentAmount={todayTotal} dailyGoal={dailyGoal} />
 
+      {/* Top Navigation Buttons */}
+      <View className="absolute left-0 right-0 top-12 flex-row justify-between px-6">
+        {/* History Button - Top Left */}
+        <Link href="/history" asChild>
+          <TouchableOpacity
+            className="h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.2,
+              shadowRadius: 4,
+              elevation: 4,
+            }}>
+            {getIcon('history', 24, colors.primary)}
+          </TouchableOpacity>
+        </Link>
+
+        {/* Settings Button - Top Right */}
+        <Link href="/settings" asChild>
+          <TouchableOpacity
+            className="h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.2,
+              shadowRadius: 4,
+              elevation: 4,
+            }}>
+            {getIcon('settings', 24, colors.primary)}
+          </TouchableOpacity>
+        </Link>
+      </View>
+
       {/* Plus Button Overlay */}
       <View className="absolute bottom-8 left-0 right-0 items-center">
         <TouchableOpacity

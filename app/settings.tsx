@@ -1,7 +1,202 @@
 import { Link, Stack } from 'expo-router';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
 import { Container } from '~/components/Container';
 import { HydrationGoalInput } from '~/components/HydrationGoalInput';
+import { colors } from '~/config/colors';
+import { getIcon } from '~/config/icons';
+import { fontStyles } from '~/config/fonts';
+
+// Example icon images (replace with your own assets if needed)
+const appIcon = require('../assets/icon.png');
+const flagIcon = '🇬🇧'; // Use emoji for language
+const helpIcon = '👩‍💻'; // Use emoji for help
+
+const settingsSections = [
+  {
+    data: [
+      {
+        key: 'appIcon',
+        label: 'App icon',
+        iconType: 'image',
+        icon: appIcon,
+        to: '/app-icon',
+      },
+    ],
+    headerChip: "WHAT'S NEW",
+  },
+  {
+    data: [
+      {
+        key: 'resetTime',
+        label: 'Day Reset Time, Week',
+        iconType: 'icon',
+        icon: 'time',
+        iconColor: colors.primary,
+        to: '/reset-time',
+        value: '12:00 AM',
+        valueType: 'chip',
+        valueColor: colors.text.secondary,
+        bg: colors.primaryLight + '10',
+      },
+      {
+        key: 'units',
+        label: 'Measurement Units',
+        iconType: 'emoji',
+        icon: '📏',
+        to: '/units',
+        value: 'ml',
+        valueType: 'chip',
+        valueColor: colors.text.secondary,
+        bg: colors.secondaryLight + '10',
+      },
+      {
+        key: 'sounds',
+        label: 'App Sounds, Animations',
+        iconType: 'icon',
+        icon: 'notifications',
+        iconColor: colors.accent,
+        to: '/sounds',
+        bg: colors.accentLight + '10',
+      },
+      {
+        key: 'health',
+        label: 'Apple Health Sync',
+        iconType: 'emoji',
+        icon: '❤️',
+        to: '/health',
+        value: 'Connect',
+        valueType: 'chip',
+        valueColor: colors.text.secondary,
+        bg: colors.secondary + '10',
+      },
+      {
+        key: 'watch',
+        label: 'Apple Watch',
+        iconType: 'emoji',
+        icon: '⌚️',
+        to: '/watch',
+        bg: colors.secondary + '10',
+      },
+      {
+        key: 'icloud',
+        label: 'iCloud Backup',
+        iconType: 'emoji',
+        icon: '☁️',
+        to: '/icloud',
+        bg: colors.accent + '10',
+      },
+    ],
+  },
+  {
+    data: [
+      {
+        key: 'language',
+        label: 'Language',
+        iconType: 'emoji',
+        icon: flagIcon,
+        to: '/language',
+        bg: colors.primary + '10',
+      },
+      {
+        key: 'help',
+        label: 'Help & Support',
+        iconType: 'emoji',
+        icon: helpIcon,
+        to: '/help',
+        bg: colors.tertiary + '10',
+      },
+    ],
+  },
+];
+
+function SettingCard({
+  iconType,
+  icon,
+  iconColor,
+  label,
+  value,
+  valueType,
+  valueColor,
+  to,
+  bg,
+}: any) {
+  return (
+    <Link href={to} asChild>
+      <TouchableOpacity
+        style={{
+          backgroundColor: colors.surface,
+          borderRadius: 20,
+          marginBottom: 16,
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingHorizontal: 16,
+          paddingVertical: 14,
+          shadowColor: colors.primary,
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.06,
+          shadowRadius: 8,
+          elevation: 2,
+        }}
+        activeOpacity={0.85}>
+        {/* Icon */}
+        <View
+          style={{
+            width: 44,
+            height: 44,
+            borderRadius: 22,
+            backgroundColor: bg || colors.tertiaryLight,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginRight: 16,
+          }}>
+          {iconType === 'image' && (
+            <Image source={icon} style={{ width: 32, height: 32, borderRadius: 8 }} />
+          )}
+          {iconType === 'emoji' && <Text style={[fontStyles.bold, { fontSize: 24 }]}>{icon}</Text>}
+          {iconType === 'icon' && getIcon(icon, 26, iconColor || colors.primary)}
+        </View>
+        {/* Label & Value */}
+        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={[fontStyles.semibold, { fontSize: 16, color: colors.text.primary }]}>
+            {label}
+          </Text>
+          {value && (
+            <View style={{ flex: 1, alignItems: 'flex-end' }}>
+              {valueType === 'chip' ? (
+                <Text
+                  style={[
+                    fontStyles.medium,
+                    {
+                      fontSize: 13,
+                      color: valueColor || colors.text.secondary,
+                      backgroundColor: colors.gray[100],
+                      borderRadius: 12,
+                      paddingHorizontal: 10,
+                      paddingVertical: 2,
+                      marginLeft: 8,
+                      overflow: 'hidden',
+                    },
+                  ]}>
+                  {value}
+                </Text>
+              ) : (
+                <Text
+                  style={[
+                    fontStyles.medium,
+                    { fontSize: 13, color: valueColor || colors.text.secondary, marginLeft: 8 },
+                  ]}>
+                  {value}
+                </Text>
+              )}
+            </View>
+          )}
+        </View>
+        {/* Chevron */}
+        <View style={{ marginLeft: 10 }}>{getIcon('chevronRight', 22, colors.gray[300])}</View>
+      </TouchableOpacity>
+    </Link>
+  );
+}
 
 export default function Settings() {
   const handleGoalUpdated = (newGoal: number) => {
@@ -10,114 +205,67 @@ export default function Settings() {
   };
 
   return (
-    <>
-      <Stack.Screen options={{ title: 'Settings' }} />
-      <Container>
-        <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-          {/* Header */}
-          <View className="mb-6">
-            <Text className="text-center text-2xl font-bold text-gray-800">⚙️ Settings</Text>
-            <Text className="text-center text-sm text-gray-600">
-              Customize your hydration tracking experience
+    <View className="bg-background flex-1">
+      <ScrollView
+        style={{ backgroundColor: colors.background }}
+        showsVerticalScrollIndicator={false}>
+        {/* Top bar with chip */}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: 16,
+            marginBottom: 8,
+            justifyContent: 'flex-end',
+            paddingHorizontal: 16,
+          }}>
+          <View
+            style={{
+              backgroundColor: colors.gray[100],
+              borderRadius: 16,
+              paddingHorizontal: 14,
+              paddingVertical: 4,
+            }}>
+            <Text
+              style={[
+                fontStyles.medium,
+                { fontSize: 13, color: colors.text.secondary, letterSpacing: 1 },
+              ]}>
+              WHAT'S NEW
             </Text>
           </View>
-
-          {/* Hydration Goal Section */}
-          <View className="mb-6">
-            <HydrationGoalInput onGoalUpdated={handleGoalUpdated} />
-          </View>
-
-          {/* Reminder Settings Section */}
-          <View className="mb-6">
-            <Text className="mb-4 text-lg font-bold text-gray-800">Notifications</Text>
-            <Link href="/reminders" asChild>
-              <TouchableOpacity className="flex-row items-center justify-between rounded-lg border border-purple-200 bg-purple-50 p-4">
-                <View className="flex-row items-center">
-                  <Text className="mr-3 text-2xl">⏰</Text>
-                  <View>
-                    <Text className="font-medium text-purple-800">Reminder Settings</Text>
-                    <Text className="text-sm text-purple-600">
-                      Manage when you get reminded to drink water
-                    </Text>
-                  </View>
+        </View>
+        {/* Settings sections */}
+        {settingsSections.map((section, idx) => (
+          <View key={idx} style={{ marginBottom: idx < settingsSections.length - 1 ? 32 : 0 }}>
+            {/* Section chip if present */}
+            {section.headerChip && (
+              <View style={{ alignItems: 'flex-end', marginBottom: 8, paddingHorizontal: 16 }}>
+                <View
+                  style={{
+                    backgroundColor: colors.gray[100],
+                    borderRadius: 16,
+                    paddingHorizontal: 14,
+                    paddingVertical: 4,
+                  }}>
+                  <Text
+                    style={[
+                      fontStyles.medium,
+                      { fontSize: 13, color: colors.text.secondary, letterSpacing: 1 },
+                    ]}>
+                    {section.headerChip}
+                  </Text>
                 </View>
-                <Text className="text-lg text-purple-600">→</Text>
-              </TouchableOpacity>
-            </Link>
-          </View>
-
-          {/* App Info Section */}
-          <View className="mb-6">
-            <Text className="mb-4 text-lg font-bold text-gray-800">About</Text>
-            <View className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-              <View className="mb-3">
-                <Text className="font-medium text-gray-800">💧 Drinking Tracker</Text>
-                <Text className="text-sm text-gray-600">
-                  Stay hydrated and build healthy habits
-                </Text>
               </View>
-
-              <View className="mb-3">
-                <Text className="text-sm text-gray-600">
-                  <Text className="font-medium">Version:</Text> 1.0.0
-                </Text>
-                <Text className="text-sm text-gray-600">
-                  <Text className="font-medium">Storage:</Text> All data is stored locally on your
-                  device
-                </Text>
-              </View>
-
-              <View className="border-t border-gray-200 pt-3">
-                <Text className="text-xs text-gray-500">
-                  Your privacy is important to us. This app works completely offline and doesn't
-                  collect or share any personal data.
-                </Text>
-              </View>
+            )}
+            <View style={{ paddingHorizontal: 16 }}>
+              {section.data.map((item: any) => (
+                <SettingCard key={item.key} {...item} />
+              ))}
             </View>
           </View>
-
-          {/* Quick Actions */}
-          <View className="mb-6">
-            <Text className="mb-4 text-lg font-bold text-gray-800">Quick Actions</Text>
-            <View className="space-y-3">
-              <Link href="/history" asChild>
-                <TouchableOpacity className="flex-row items-center justify-between rounded-lg border border-blue-200 bg-blue-50 p-4">
-                  <View className="flex-row items-center">
-                    <Text className="mr-3 text-2xl">📊</Text>
-                    <Text className="font-medium text-blue-800">View History</Text>
-                  </View>
-                  <Text className="text-lg text-blue-600">→</Text>
-                </TouchableOpacity>
-              </Link>
-
-              <Link href="/" asChild>
-                <TouchableOpacity className="flex-row items-center justify-between rounded-lg border border-green-200 bg-green-50 p-4">
-                  <View className="flex-row items-center">
-                    <Text className="mr-3 text-2xl">🏠</Text>
-                    <Text className="font-medium text-green-800">Back to Home</Text>
-                  </View>
-                  <Text className="text-lg text-green-600">→</Text>
-                </TouchableOpacity>
-              </Link>
-            </View>
-          </View>
-
-          {/* Health Tips */}
-          <View className="mb-6">
-            <Text className="mb-4 text-lg font-bold text-gray-800">💡 Health Tips</Text>
-            <View className="rounded-lg bg-blue-50 p-4">
-              <Text className="mb-2 text-sm font-medium text-blue-800">
-                Stay Hydrated Throughout the Day
-              </Text>
-              <Text className="text-xs text-blue-600">
-                • Drink water first thing in the morning{'\n'}• Keep a water bottle with you{'\n'}•
-                Set regular reminders to drink water{'\n'}• Eat water-rich foods like fruits and
-                vegetables{'\n'}• Monitor your urine color as a hydration indicator
-              </Text>
-            </View>
-          </View>
-        </ScrollView>
-      </Container>
-    </>
+        ))}
+      </ScrollView>
+    </View>
   );
 }
