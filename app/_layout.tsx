@@ -81,13 +81,16 @@ export default function Layout() {
           headerShown: false,
           animation: 'fade',
           animationDuration: 300,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
         name="history"
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'fade',
+          animationDuration: 300,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
