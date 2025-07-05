@@ -13,6 +13,8 @@ This document outlines the default technical environment, tools, and architectur
 - **Expo Router** for routing and navigation
 - **Jest** and **React Native Testing Library** for unit and component testing
 - **NativeWind** for styling
+- **Expo Font** for custom font loading
+- **@expo/vector-icons** (Ionicons) for iconography
 
 ---
 
@@ -87,6 +89,8 @@ utils/ → Pure utility functions
 | Storage          | AsyncStorage                      |
 | Forms            | Native inputs + useState          |
 | Styling          | StyleSheet or Tailwind (optional) |
+| Icons            | @expo/vector-icons (Ionicons)     |
+| Fonts            | Expo Font (Quicksand font family) |
 | Testing          | Jest + Testing Library            |
 
 ---

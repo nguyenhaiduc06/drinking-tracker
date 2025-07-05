@@ -76,6 +76,30 @@
   - Estimated Effort: Small
   - Target Folder: `config/colors.ts`
 
+- [x] **Integrate Ionicons for iconography**
+  - Description: Set up @expo/vector-icons with Ionicons for consistent icon usage throughout the app.
+  - Priority: Medium
+  - Feature: UI/UX Consistency
+  - Dependencies: @expo/vector-icons
+  - Estimated Effort: Small
+  - Target Folder: `config/icons.ts`
+
+- [x] **Integrate Quicksand font family**
+  - Description: Set up custom Quicksand font family for branding and consistent typography throughout the app.
+  - Priority: Medium
+  - Feature: UI/UX Consistency
+  - Dependencies: expo-font, Quicksand font files
+  - Estimated Effort: Small
+  - Target Folder: `config/fonts.ts`, `app/_layout.tsx`
+
+- [x] **Clean up unused font files**
+  - Description: Remove Satoshi font files since Quicksand is used for the entire app.
+  - Priority: Low
+  - Feature: Code Cleanup
+  - Dependencies: None
+  - Estimated Effort: Small
+  - Target Folder: `assets/fonts/`
+
 ## 📊 History & Trends
 
 - [x] **Extend store to compute weekly/monthly aggregates**

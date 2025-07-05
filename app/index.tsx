@@ -6,6 +6,7 @@ import { CharacterSilhouette } from '~/components/CharacterSilhouette';
 import { WaterLogModal } from '~/components/WaterLogModal';
 import { WaterProgressView } from '~/components/WaterProgressView';
 import { colors } from '~/config/colors';
+import { getIcon } from '~/config/icons';
 import { useHydrationGoalStore } from '~/stores/hydrationGoalStore';
 import { useWaterLogStore } from '~/stores/waterLogStore';
 
@@ -50,9 +51,7 @@ export default function Home() {
             shadowRadius: 8,
             elevation: 8,
           }}>
-          <Text style={{ color: colors.primary }} className="text-3xl font-bold">
-            +
-          </Text>
+          {getIcon('add', 32, colors.primary)}
         </TouchableOpacity>
         <Text className="mt-3 text-center text-sm font-medium text-white">
           Tap to log water intake

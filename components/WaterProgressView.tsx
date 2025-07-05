@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '~/config/colors';
+import { fontStyles } from '~/config/fonts';
 
 interface WaterProgressViewProps {
   currentAmount: number;
@@ -63,21 +64,22 @@ const styles = StyleSheet.create({
   },
   amountText: {
     fontSize: 48,
-    fontWeight: 'bold',
     color: colors.text.primary,
     textAlign: 'center',
+    ...fontStyles.bold,
   },
   goalText: {
     fontSize: 18,
     color: colors.text.secondary,
     textAlign: 'center',
     marginTop: 8,
+    ...fontStyles.medium,
   },
   percentageText: {
     fontSize: 24,
-    fontWeight: '600',
     color: colors.primary,
     textAlign: 'center',
     marginTop: 16,
+    ...fontStyles.semibold,
   },
 });

@@ -1,13 +1,30 @@
 import '../global.css';
 
 import { Stack } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
 import { reminderScheduler } from '../lib/notifications';
+import { loadFonts } from '../config/fonts';
 
 export default function Layout() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
   useEffect(() => {
-    // Initialize reminders on app start
-    initializeReminders();
+    // Load fonts and initialize reminders on app start
+    const initializeApp = async () => {
+      try {
+        await loadFonts();
+        setFontsLoaded(true);
+      } catch (error) {
+        console.error('Error loading fonts:', error);
+        setFontsLoaded(true); // Continue without custom fonts
+      }
+
+      // Initialize reminders
+      initializeReminders();
+    };
+
+    initializeApp();
   }, []);
 
   const initializeReminders = async () => {
@@ -46,6 +63,14 @@ export default function Layout() {
       console.error('Error initializing reminders:', error);
     }
   };
+
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return <Stack screenOptions={{ headerShown: false }} />;
 }
