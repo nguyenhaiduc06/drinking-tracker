@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '~/config/colors';
-import { fontStyles } from '~/config/fonts';
+import { View, Text } from 'react-native';
 
 interface WaterProgressViewProps {
   currentAmount: number;
@@ -16,70 +14,22 @@ export const WaterProgressView: React.FC<WaterProgressViewProps> = ({
   const progressPercentage = Math.round(progress * 100);
 
   return (
-    <View style={styles.container}>
+    <View className="bg-background relative flex-1">
       {/* Progress Fill */}
       <View
-        style={[
-          styles.progressFill,
-          {
-            height: `${progressPercentage}%`,
-          },
-        ]}
+        className="bg-primary absolute bottom-0 left-0 right-0 rounded-t-2xl"
+        style={{ height: `${progressPercentage}%` }}
       />
 
       {/* Progress Text Overlay */}
-      <View style={styles.textOverlay}>
-        <Text style={styles.amountText}>{currentAmount.toLocaleString()}ml</Text>
-        <Text style={styles.goalText}>of {dailyGoal.toLocaleString()}ml</Text>
-        <Text style={styles.percentageText}>{progressPercentage}%</Text>
+      <View className="absolute inset-0 flex-1 items-center justify-center px-5">
+        <Text className="font-quicksand text-text-primary text-center text-5xl font-bold">
+          {currentAmount.toLocaleString()}ml
+        </Text>
+        <Text className="font-quicksand text-text-secondary mt-2 text-center text-lg font-medium">
+          of {dailyGoal.toLocaleString()}ml
+        </Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-    position: 'relative',
-  },
-  progressFill: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: colors.primary,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  textOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-  amountText: {
-    fontSize: 48,
-    color: colors.text.primary,
-    textAlign: 'center',
-    ...fontStyles.bold,
-  },
-  goalText: {
-    fontSize: 18,
-    color: colors.text.secondary,
-    textAlign: 'center',
-    marginTop: 8,
-    ...fontStyles.medium,
-  },
-  percentageText: {
-    fontSize: 24,
-    color: colors.primary,
-    textAlign: 'center',
-    marginTop: 16,
-    ...fontStyles.semibold,
-  },
-});

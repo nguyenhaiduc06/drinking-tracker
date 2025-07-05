@@ -10,9 +10,9 @@ This drinking tracker app embraces a **cute, young, and energetic** design langu
 
 ### **Personality Traits**
 
-- **Cute**: Rounded corners, soft shadows, friendly icons, playful animations
-- **Young**: Bright colors, modern typography, dynamic layouts, relatable language
-- **Energetic**: Bouncy animations, vibrant gradients, active states, motivational messaging
+- **Cute**: Rounded corners, soft backgrounds, friendly icons, playful animations
+- **Young**: Bright pastel colors, modern typography, dynamic layouts, relatable language
+- **Energetic**: Bouncy animations, active states, motivational messaging
 
 ### **Target Feel**
 
@@ -23,324 +23,77 @@ This drinking tracker app embraces a **cute, young, and energetic** design langu
 
 ---
 
-## 🌈 Color Palette
+## 🌈 Color Palette (Minimal & Pastel)
 
-### **Primary Colors (Energetic & Friendly)**
+- **Brand color:** `primary` (`#FF6B9D`)
+- **Pastel colors:**
+  - `pastelPink` (`#FF7479`)
+  - `pastelBlue` (`#55B7FF`)
+  - `pastelPurple` (`#9090ED`)
+  - `pastelLavender` (`#CF89DC`)
+  - `pastelGreen` (`#3EBF9E`)
+  - `pastelLime` (`#81D444`)
+  - `pastelRose` (`#FF93A5`)
+  - `pastelOrange` (`#FF956C`)
+- **Text colors:**
+  - `text-primary` (`#2D3748`)
+  - `text-secondary` (`#718096`)
+  - `text-tertiary` (`#A0AEC0`)
+  - `text-inverse` (`#FFFFFF`)
+- **Background colors:**
+  - `background` (`#FEFEFE`)
+  - `surface` (`#FFFFFF`)
+  - `card` (`#F8F9FF`)
 
-```typescript
-// Updated color palette for cute & energetic vibe
-export const colors = {
-  // Brand Colors - Vibrant & Energetic
-  primary: '#FF6B9D', // Cute pink - main brand color
-  primaryLight: '#FF8FB1', // Soft pink - hover states
-  primaryDark: '#E55A8A', // Deeper pink - active states
-
-  // Accent Colors - Playful & Young
-  accent: '#4ECDC4', // Mint green - success/positive
-  accentLight: '#6EDDD6', // Light mint - subtle highlights
-  accentDark: '#3DB8B0', // Dark mint - emphasis
-
-  // Secondary Colors - Fun & Approachable
-  secondary: '#FFD93D', // Sunny yellow - energy & joy
-  secondaryLight: '#FFE55C', // Light yellow - highlights
-  secondaryDark: '#F4C430', // Dark yellow - emphasis
-
-  // Tertiary Colors - Supportive & Friendly
-  tertiary: '#A8E6CF', // Soft mint - backgrounds
-  tertiaryLight: '#C8F4E0', // Very light mint - subtle backgrounds
-  tertiaryDark: '#8DD4B8', // Dark mint - borders
-
-  // UI Colors - Clean & Modern
-  background: '#FEFEFE', // Pure white background
-  surface: '#FFFFFF', // Card surfaces
-  card: '#F8F9FF', // Soft card backgrounds
-
-  // Text Colors - Readable & Friendly
-  text: {
-    primary: '#2D3748', // Dark but not harsh
-    secondary: '#718096', // Medium gray - secondary text
-    tertiary: '#A0AEC0', // Light gray - tertiary text
-    inverse: '#FFFFFF', // White text on dark backgrounds
-  },
-
-  // Status Colors - Positive & Encouraging
-  success: '#48BB78', // Green - achievements
-  warning: '#ED8936', // Orange - gentle reminders
-  error: '#F56565', // Soft red - errors
-  info: '#4299E1', // Blue - information
-
-  // Gradient Colors - Energetic & Dynamic
-  gradients: {
-    primary: ['#FF6B9D', '#FF8FB1'], // Pink gradient
-    accent: ['#4ECDC4', '#6EDDD6'], // Mint gradient
-    secondary: ['#FFD93D', '#FFE55C'], // Yellow gradient
-    background: ['#FEFEFE', '#F8F9FF'], // Subtle background
-  },
-
-  // Neutral Colors - Soft & Approachable
-  gray: {
-    50: '#F7FAFC',
-    100: '#EDF2F7',
-    200: '#E2E8F0',
-    300: '#CBD5E0',
-    400: '#A0AEC0',
-    500: '#718096',
-    600: '#4A5568',
-    700: '#2D3748',
-    800: '#1A202C',
-    900: '#171923',
-  },
-} as const;
-```
+> Only these colors are available as Tailwind classes. No accent, secondary, tertiary, status, or neutral colors are included in the palette.
 
 ---
 
 ## 🔤 Typography
 
-### **Font Personality**
-
-- **Quicksand**: Already perfect for cute & friendly feel
-- **Rounded, approachable letterforms**
-- **Good readability with personality**
-
-### **Typography Scale**
-
-```typescript
-export const typography = {
-  // Headings - Energetic & Bold
-  h1: {
-    fontSize: 32,
-    fontFamily: fonts.quicksand.bold,
-    lineHeight: 40,
-    letterSpacing: -0.5,
-  },
-  h2: {
-    fontSize: 28,
-    fontFamily: fonts.quicksand.semibold,
-    lineHeight: 36,
-    letterSpacing: -0.3,
-  },
-  h3: {
-    fontSize: 24,
-    fontFamily: fonts.quicksand.semibold,
-    lineHeight: 32,
-    letterSpacing: -0.2,
-  },
-
-  // Body Text - Friendly & Readable
-  bodyLarge: {
-    fontSize: 18,
-    fontFamily: fonts.quicksand.medium,
-    lineHeight: 26,
-  },
-  bodyMedium: {
-    fontSize: 16,
-    fontFamily: fonts.quicksand.regular,
-    lineHeight: 24,
-  },
-  bodySmall: {
-    fontSize: 14,
-    fontFamily: fonts.quicksand.regular,
-    lineHeight: 20,
-  },
-
-  // Captions - Cute & Informative
-  caption: {
-    fontSize: 12,
-    fontFamily: fonts.quicksand.medium,
-    lineHeight: 16,
-  },
-
-  // Buttons - Energetic & Clear
-  button: {
-    fontSize: 16,
-    fontFamily: fonts.quicksand.semibold,
-    lineHeight: 24,
-    letterSpacing: 0.5,
-  },
-} as const;
-```
+- **Quicksand** is the default font family (configured in Tailwind as `font-quicksand`)
+- **All text uses Tailwind font classes**
+- **Font weights**: Use `font-bold`, `font-semibold`, `font-medium`, `font-normal` as appropriate
+- **No custom font styles outside Tailwind**
 
 ---
 
 ## 🎯 Component Design Principles
 
-### **Buttons**
-
-- **Rounded corners** (16px radius)
-- **Soft shadows** with subtle elevation
-- **Bouncy animations** on press
-- **Gradient backgrounds** for primary actions
-- **Friendly micro-interactions**
-
-### **Cards & Surfaces**
-
-- **Generous padding** (16-24px)
-- **Rounded corners** (12-16px radius)
-- **Soft shadows** with blur effects
-- **Subtle borders** or no borders
-- **Breathing room** between elements
-
-### **Icons**
-
-- **Rounded, friendly shapes**
-- **Consistent stroke weights**
-- **Playful but clear meaning**
-- **Colorful when appropriate**
-- **Smooth animations**
-
-### **Animations & Micro-interactions**
-
-- **Bouncy easing** (cubic-bezier(0.68, -0.55, 0.265, 1.55))
-- **Quick but smooth** (200-300ms)
-- **Delightful feedback** on interactions
-- **Subtle hover states**
-- **Loading animations** with personality
-
----
-
-## 🎨 Visual Elements
-
-### **Shapes & Geometry**
-
-- **Rounded rectangles** everywhere
-- **Circular elements** for emphasis
-- **Soft, organic curves**
-- **No sharp corners**
-- **Generous spacing**
-
-### **Shadows & Depth**
-
-- **Soft, diffused shadows**
-- **Multiple shadow layers** for depth
-- **Color-tinted shadows** (pink/mint tints)
-- **Subtle elevation** hierarchy
-
-### **Spacing System**
-
-```typescript
-export const spacing = {
-  xs: 4, // Tiny gaps
-  sm: 8, // Small gaps
-  md: 16, // Standard gaps
-  lg: 24, // Large gaps
-  xl: 32, // Extra large gaps
-  xxl: 48, // Huge gaps
-} as const;
-```
-
-### **Border Radius**
-
-```typescript
-export const borderRadius = {
-  sm: 8, // Small elements
-  md: 12, // Cards, buttons
-  lg: 16, // Large cards
-  xl: 24, // Hero elements
-  full: 9999, // Circular elements
-} as const;
-```
+- **All styling uses Tailwind class names**
+- **Rounded corners** (`rounded-xl`, `rounded-2xl`)
+- **Soft, pastel backgrounds** (`bg-pastelBlue`, `bg-pastelPink`, etc.)
+- **No gradients or dark backgrounds**
+- **Generous padding and spacing** (`p-4`, `mb-4`, etc.)
+- **Consistent use of pastel colors for icons, highlights, and accents**
+- **Quicksand font for all text** (`font-quicksand`)
 
 ---
 
 ## 🎭 Content & Messaging
 
-### **Tone of Voice**
-
 - **Friendly and encouraging**
-- **Use emojis** strategically
+- **Strategic emoji usage**
 - **Positive reinforcement**
 - **Celebratory language**
 - **Relatable and casual**
-
-### **Example Messages**
-
-- ✅ "Great job! You're 75% hydrated! 💧"
-- ✅ "Time for a water break! 🌟"
-- ✅ "You're on fire today! 🔥"
-- ✅ "Almost there! Keep going! ✨"
-- ❌ "You need to drink more water"
-- ❌ "Warning: Dehydration detected"
-
-### **Emoji Usage**
-
-- **Strategic placement** (not overwhelming)
-- **Relevant to context**
-- **Celebratory and encouraging**
-- **Consistent with brand personality**
 
 ---
 
 ## 🎪 Animation Guidelines
 
-### **Easing Curves**
-
-```typescript
-export const easing = {
-  // Bouncy & Energetic
-  bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-
-  // Smooth & Natural
-  smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
-
-  // Quick & Responsive
-  quick: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-} as const;
-```
-
-### **Animation Durations**
-
-```typescript
-export const durations = {
-  fast: 150, // Quick feedback
-  normal: 300, // Standard transitions
-  slow: 500, // Emphasis animations
-} as const;
-```
+- **Bouncy, energetic transitions**
+- **Quick but smooth (200-300ms)**
+- **Delightful feedback on interactions**
 
 ---
 
 ## 🎨 Implementation Priorities
 
-### **Phase 1: Core Visual Updates**
-
-1. **Update color palette** to cute & energetic colors
-2. **Implement new typography** scale
-3. **Update component styling** with rounded corners and soft shadows
-4. **Add gradient backgrounds** to key elements
-
-### **Phase 2: Micro-interactions**
-
-1. **Button press animations** with bounce
-2. **Loading states** with personality
-3. **Success celebrations** with confetti/particles
-4. **Smooth transitions** between screens
-
-### **Phase 3: Content & Messaging**
-
-1. **Update all text** to friendly tone
-2. **Add strategic emojis**
-3. **Create encouraging messages**
-4. **Implement achievement celebrations**
+1. **Use Tailwind for all styling**
+2. **Apply pastel palette and Quicksand font via Tailwind classes**
+3. **Ensure all screens are light, soft, and visually consistent**
 
 ---
 
-## 🎯 Success Metrics
-
-### **User Experience Goals**
-
-- **Delight factor**: Users smile when using the app
-- **Engagement**: Increased daily usage
-- **Retention**: Users return consistently
-- **Sharing**: Users want to share achievements
-
-### **Design Quality Checks**
-
-- **Consistency**: All elements follow design system
-- **Accessibility**: Cute doesn't mean inaccessible
-- **Performance**: Smooth animations don't lag
-- **Scalability**: Design system grows with app
-
----
-
-This design language transforms the drinking tracker from a utilitarian tool into a delightful companion that makes hydration tracking feel like a fun, rewarding experience! 🌟
+This design language transforms the drinking tracker from a utilitarian tool into a delightful, pastel, and energetic companion! 🌟

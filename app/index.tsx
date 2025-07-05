@@ -1,41 +1,27 @@
-import { Link, Stack } from 'expo-router';
+import { Link, Stack, useRouter } from 'expo-router';
 import * as React from 'react';
-import { RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { Container } from '~/components/Container';
-import { CharacterSilhouette } from '~/components/CharacterSilhouette';
-import { WaterLogModal } from '~/components/WaterLogModal';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { WaterProgressView } from '~/components/WaterProgressView';
 import { colors } from '~/config/colors';
-import { getIcon } from '~/config/icons';
+import { icons } from '~/config/icons';
 import { useHydrationGoalStore } from '~/stores/hydrationGoalStore';
 import { useWaterLogStore } from '~/stores/waterLogStore';
 
 export default function Home() {
   const { loadStoredData, isLoading, getTodayTotal } = useWaterLogStore();
   const { dailyGoal } = useHydrationGoalStore();
-  const [refreshing, setRefreshing] = React.useState(false);
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const router = useRouter();
 
   // Initialize stores on app start
   React.useEffect(() => {
     loadStoredData();
   }, []);
 
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    await loadStoredData();
-    setRefreshing(false);
-  };
-
-  const handleEntryAdded = () => {
-    // Refresh the view when a new entry is added
-    // This will trigger a re-render to update the progress
-  };
-
   const todayTotal = getTodayTotal();
 
   return (
-    <View className="flex-1">
+    <View className="bg-background flex-1">
       {/* Water Progress View - Full Screen */}
       <WaterProgressView currentAmount={todayTotal} dailyGoal={dailyGoal} />
 
@@ -44,30 +30,18 @@ export default function Home() {
         {/* History Button - Top Left */}
         <Link href="/history" asChild>
           <TouchableOpacity
-            className="h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.2,
-              shadowRadius: 4,
-              elevation: 4,
-            }}>
-            {getIcon('history', 24, colors.primary)}
+            className="bg-primary h-12 w-12 items-center justify-center rounded-full"
+            activeOpacity={0.85}>
+            <Ionicons name={icons.history} size={24} color={colors.surface} />
           </TouchableOpacity>
         </Link>
 
         {/* Settings Button - Top Right */}
         <Link href="/settings" asChild>
           <TouchableOpacity
-            className="h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.2,
-              shadowRadius: 4,
-              elevation: 4,
-            }}>
-            {getIcon('settings', 24, colors.primary)}
+            className="bg-primary h-12 w-12 items-center justify-center rounded-full"
+            activeOpacity={0.85}>
+            <Ionicons name={icons.settings} size={24} color={colors.surface} />
           </TouchableOpacity>
         </Link>
       </View>
@@ -75,28 +49,15 @@ export default function Home() {
       {/* Plus Button Overlay */}
       <View className="absolute bottom-8 left-0 right-0 items-center">
         <TouchableOpacity
-          onPress={() => setModalVisible(true)}
-          className="h-16 w-16 items-center justify-center rounded-full bg-white shadow-lg"
-          style={{
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 8,
-            elevation: 8,
-          }}>
-          {getIcon('add', 32, colors.primary)}
+          onPress={() => router.push('/water-log')}
+          className="bg-primary h-16 w-16 items-center justify-center rounded-full"
+          activeOpacity={0.85}>
+          <Ionicons name={icons.add} size={32} color={colors.surface} />
         </TouchableOpacity>
-        <Text className="mt-3 text-center text-sm font-medium text-white">
+        <Text className="font-quicksand text-primary mt-3 text-center text-sm font-medium">
           Tap to log water intake
         </Text>
       </View>
-
-      {/* Water Log Modal */}
-      <WaterLogModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onEntryAdded={handleEntryAdded}
-      />
     </View>
   );
 }
