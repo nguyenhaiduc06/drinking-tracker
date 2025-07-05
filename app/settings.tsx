@@ -1,15 +1,9 @@
 import { Link, Stack } from 'expo-router';
-import { ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Container } from '~/components/Container';
-import { HydrationGoalInput } from '~/components/HydrationGoalInput';
 import { colors } from '~/config/colors';
 import { getIcon } from '~/config/icons';
 import { fontStyles } from '~/config/fonts';
-
-// Example icon images (replace with your own assets if needed)
-const appIcon = require('../assets/icon.png');
-const flagIcon = '🇬🇧'; // Use emoji for language
-const helpIcon = '👩‍💻'; // Use emoji for help
 
 const settingsSections = [
   {
@@ -17,8 +11,8 @@ const settingsSections = [
       {
         key: 'appIcon',
         label: 'App icon',
-        iconType: 'image',
-        icon: appIcon,
+        iconType: 'icon',
+        icon: 'home', // Example icon, replace as needed
         to: '/app-icon',
       },
     ],
@@ -41,8 +35,9 @@ const settingsSections = [
       {
         key: 'units',
         label: 'Measurement Units',
-        iconType: 'emoji',
-        icon: '📏',
+        iconType: 'icon',
+        icon: 'edit',
+        iconColor: colors.secondary,
         to: '/units',
         value: 'ml',
         valueType: 'chip',
@@ -61,8 +56,9 @@ const settingsSections = [
       {
         key: 'health',
         label: 'Apple Health Sync',
-        iconType: 'emoji',
-        icon: '❤️',
+        iconType: 'icon',
+        icon: 'success',
+        iconColor: colors.success,
         to: '/health',
         value: 'Connect',
         valueType: 'chip',
@@ -72,16 +68,18 @@ const settingsSections = [
       {
         key: 'watch',
         label: 'Apple Watch',
-        iconType: 'emoji',
-        icon: '⌚️',
+        iconType: 'icon',
+        icon: 'time',
+        iconColor: colors.secondary,
         to: '/watch',
         bg: colors.secondary + '10',
       },
       {
         key: 'icloud',
         label: 'iCloud Backup',
-        iconType: 'emoji',
-        icon: '☁️',
+        iconType: 'icon',
+        icon: 'cloud', // Use a relevant Ionicon if available
+        iconColor: colors.accent,
         to: '/icloud',
         bg: colors.accent + '10',
       },
@@ -92,16 +90,18 @@ const settingsSections = [
       {
         key: 'language',
         label: 'Language',
-        iconType: 'emoji',
-        icon: flagIcon,
+        iconType: 'icon',
+        icon: 'info',
+        iconColor: colors.primary,
         to: '/language',
         bg: colors.primary + '10',
       },
       {
         key: 'help',
         label: 'Help & Support',
-        iconType: 'emoji',
-        icon: helpIcon,
+        iconType: 'icon',
+        icon: 'info',
+        iconColor: colors.tertiaryDark,
         to: '/help',
         bg: colors.tertiary + '10',
       },
@@ -124,18 +124,13 @@ function SettingCard({
     <Link href={to} asChild>
       <TouchableOpacity
         style={{
-          backgroundColor: colors.surface,
+          backgroundColor: colors.gray[100],
           borderRadius: 20,
           marginBottom: 16,
           flexDirection: 'row',
           alignItems: 'center',
           paddingHorizontal: 16,
           paddingVertical: 14,
-          shadowColor: colors.primary,
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.06,
-          shadowRadius: 8,
-          elevation: 2,
         }}
         activeOpacity={0.85}>
         {/* Icon */}
@@ -149,15 +144,11 @@ function SettingCard({
             justifyContent: 'center',
             marginRight: 16,
           }}>
-          {iconType === 'image' && (
-            <Image source={icon} style={{ width: 32, height: 32, borderRadius: 8 }} />
-          )}
-          {iconType === 'emoji' && <Text style={[fontStyles.bold, { fontSize: 24 }]}>{icon}</Text>}
           {iconType === 'icon' && getIcon(icon, 26, iconColor || colors.primary)}
         </View>
         {/* Label & Value */}
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={[fontStyles.semibold, { fontSize: 16, color: colors.text.primary }]}>
+          <Text style={[fontStyles.bold, { fontSize: 16, color: colors.text.primary }]}>
             {label}
           </Text>
           {value && (
@@ -169,7 +160,7 @@ function SettingCard({
                     {
                       fontSize: 13,
                       color: valueColor || colors.text.secondary,
-                      backgroundColor: colors.gray[100],
+                      backgroundColor: colors.gray[200],
                       borderRadius: 12,
                       paddingHorizontal: 10,
                       paddingVertical: 2,
@@ -199,11 +190,6 @@ function SettingCard({
 }
 
 export default function Settings() {
-  const handleGoalUpdated = (newGoal: number) => {
-    // Optional: Handle goal update if needed
-    console.log('Goal updated to:', newGoal);
-  };
-
   return (
     <View className="bg-background flex-1">
       <ScrollView
