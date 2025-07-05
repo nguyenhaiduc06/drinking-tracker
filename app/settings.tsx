@@ -1,8 +1,12 @@
 import { Link, useRouter } from 'expo-router';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { colors } from '~/config/colors';
+import { useWaterLogStore } from '~/stores/waterLogStore';
+import { useHydrationGoalStore } from '~/stores/hydrationGoalStore';
+import { StorageUtil } from '~/utils/storage';
+import { reminderScheduler } from '~/lib/notifications';
 
 function SettingCard({ icon, iconColor, label, value, to, onPress, bg, destructive }: any) {
   const CardContent = () => (
@@ -55,10 +59,60 @@ function SettingCard({ icon, iconColor, label, value, to, onPress, bg, destructi
 
 export default function Settings() {
   const router = useRouter();
+  const { clearAllData: clearWaterLogData } = useWaterLogStore();
+  const { resetToDefault: resetHydrationGoal } = useHydrationGoalStore();
 
   const handleClearData = () => {
-    // TODO: Implement clear data functionality
-    console.log('Clear data pressed');
+    Alert.alert(
+      'Clear All Data',
+      'This will permanently delete all your water logs, goals, reminders, and app settings. This action cannot be undone.',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Clear All Data',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              // Show loading/processing state
+              Alert.alert('Clearing Data...', 'Please wait while we clear your data.');
+
+              // 1. Clear all AsyncStorage data
+              await StorageUtil.clearAll();
+
+              // 2. Reset in-memory store states
+              await clearWaterLogData();
+              resetHydrationGoal();
+
+              // 3. Cancel all scheduled notifications
+              await reminderScheduler.cancelAllReminders();
+
+              // 4. Show success message
+              Alert.alert(
+                'Data Cleared',
+                'All your data has been successfully cleared. The app will now restart to its default state.',
+                [
+                  {
+                    text: 'OK',
+                    onPress: () => {
+                      // Navigate back to home screen
+                      router.replace('/');
+                    },
+                  },
+                ]
+              );
+            } catch (error) {
+              console.error('Error clearing data:', error);
+              Alert.alert('Error', 'There was an error clearing your data. Please try again.', [
+                { text: 'OK' },
+              ]);
+            }
+          },
+        },
+      ]
+    );
   };
 
   return (
