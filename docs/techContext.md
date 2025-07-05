@@ -12,6 +12,7 @@ This document outlines the default technical environment, tools, and architectur
 - **AsyncStorage** for local data persistence
 - **Expo Router** for routing and navigation
 - **Jest** and **React Native Testing Library** for unit and component testing
+- **NativeWind** for styling
 
 ---
 
